@@ -18,10 +18,15 @@ jobs:
         with:
           node-version: 18
 
+      # 🔥 FIX PRINCIPAL (garante Cypress instalado corretamente)
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
-     
+      # 🔥 Força instalação correta do Cypress binary
+      - name: Instalar Cypress
+        run: npx cypress verify
+
+      # 🧠 Dependências Linux corretas
       - name: Instalar dependências do Linux
         run: |
           sudo apt-get update
@@ -34,11 +39,11 @@ jobs:
             libxss1 \
             libasound2t64
 
-      # RODAR TESTES (ÚNICO STEP NECESSÁRIO)
+      # 🚀 Rodar testes
       - name: Rodar testes Cypress
         run: npx cypress run
 
-      #  Allure
+      # 📊 Allure
       - name: Instalar Allure CLI
         run: npm install -g allure-commandline
 
