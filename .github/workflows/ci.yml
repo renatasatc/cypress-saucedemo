@@ -117,7 +117,7 @@ jobs:
 
       - name: Merge dos resultados
         run: |
-          mkdir allure-results
+          mkdir -p allure-results
           cp -r allure-results-e2e/* allure-results || true
           cp -r allure-results-api/* allure-results || true
 
