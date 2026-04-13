@@ -21,9 +21,22 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      # 🔥 CORREÇÃO IMPORTANTE AQUI
-      - name: Instalar Cypress
-        run: npx cypress install
+      - name: Instalar dependências do Linux
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk2.0-0 \
+            libgtk-3-0 \
+            libgbm-dev \
+            libnotify-dev \
+            libnss3 \
+            libxss1 \
+            libasound2
+
+      - name: Cache e instalação do Cypress
+        run: |
+          npx cypress cache clear
+          npx cypress install
 
       - name: Rodar testes Cypress
         run: npx cypress run
