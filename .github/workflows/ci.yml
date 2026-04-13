@@ -18,14 +18,10 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar dependências do projeto
+      - name: Instalar dependências
         run: npm install
 
-      #  Cypress garantido no ambiente CI
-      - name: Instalar Cypress
-        run: npx cypress install
-
-      #  Dependências corretas para Ubuntu 24.04 (FIX DO ERRO)
+     
       - name: Instalar dependências do Linux
         run: |
           sudo apt-get update
@@ -38,18 +34,17 @@ jobs:
             libxss1 \
             libasound2t64
 
-      #  Rodar testes
+      # RODAR TESTES (ÚNICO STEP NECESSÁRIO)
       - name: Rodar testes Cypress
         run: npx cypress run
 
-      #  Gerar relatório Allure
+      #  Allure
       - name: Instalar Allure CLI
         run: npm install -g allure-commandline
 
       - name: Gerar relatório Allure
         run: allure generate allure-results --clean -o allure-report
 
-      #  Salvar relatório
       - name: Upload do relatório Allure
         uses: actions/upload-artifact@v4
         with:
