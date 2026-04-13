@@ -37,9 +37,9 @@ jobs:
             libxss1 \
             libasound2t64
 
-      # ✅ CORRIGIDO AQUI
-      - name: Rodar testes E2E
-        run: npx cypress run --spec "cypress/e2e/*.cy.js"
+      # ✅ CORRIGIDO: roda só UI
+      - name: Rodar testes E2E (UI)
+        run: npx cypress run --spec "cypress/e2e/UI/**/*.cy.js"
         continue-on-error: true
 
       - name: Instalar Allure CLI
@@ -74,6 +74,7 @@ jobs:
       - name: Verificar Cypress
         run: npx cypress verify
 
+      # ✅ CORRIGIDO: roda só API
       - name: Rodar testes API
         run: npx cypress run --spec "cypress/e2e/api/**/*.cy.js"
         continue-on-error: true
