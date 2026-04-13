@@ -37,7 +37,6 @@ jobs:
             libxss1 \
             libasound2t64
 
-      # ✅ CORRIGIDO: roda só UI
       - name: Rodar testes E2E (UI)
         run: npx cypress run --spec "cypress/e2e/UI/**/*.cy.js"
         continue-on-error: true
@@ -45,15 +44,17 @@ jobs:
       - name: Instalar Allure CLI
         run: npm install -g allure-commandline
 
-      - name: Gerar relatório Allure E2E
+      - name: Gerar resultados Allure E2E
         if: always()
-        run: allure generate allure-results --clean -o allure-report-e2e
+        run: |
+          mkdir -p allure-results-e2e
+          cp -r allure-results/* allure-results-e2e || true
 
-      - name: Upload relatório Allure E2E
+      - name: Upload resultados E2E
         uses: actions/upload-artifact@v4
         with:
-          name: allure-e2e
-          path: allure-report-e2e
+          name: allure-results-e2e
+          path: allure-results-e2e
 
 
   api-tests:
@@ -74,7 +75,6 @@ jobs:
       - name: Verificar Cypress
         run: npx cypress verify
 
-      # ✅ CORRIGIDO: roda só API
       - name: Rodar testes API
         run: npx cypress run --spec "cypress/e2e/api/**/*.cy.js"
         continue-on-error: true
@@ -82,17 +82,20 @@ jobs:
       - name: Instalar Allure CLI
         run: npm install -g allure-commandline
 
-      - name: Gerar relatório Allure API
+      - name: Gerar resultados Allure API
         if: always()
-        run: allure generate allure-results --clean -o allure-report-api
+        run: |
+          mkdir -p allure-results-api
+          cp -r allure-results/* allure-results-api || true
 
-      - name: Upload relatório Allure API
+      - name: Upload resultados API
         uses: actions/upload-artifact@v4
         with:
-          name: allure-api
-          path: allure-report-api
+          name: allure-results-api
+          path: allure-results-api
 
-            publish-allure:
+
+  publish-allure:
     needs: [e2e-tests, api-tests]
     runs-on: ubuntu-latest
 
@@ -100,20 +103,29 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Download artifacts
+      - name: Download resultados E2E
         uses: actions/download-artifact@v4
+        with:
+          name: allure-results-e2e
+          path: allure-results-e2e
 
-      - name: Preparar resultados
+      - name: Download resultados API
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-api
+          path: allure-results-api
+
+      - name: Merge dos resultados
         run: |
-          mkdir allure-results-merged
-          cp -r allure-e2e/* allure-results-merged || true
-          cp -r allure-api/* allure-results-merged || true
+          mkdir allure-results
+          cp -r allure-results-e2e/* allure-results || true
+          cp -r allure-results-api/* allure-results || true
 
       - name: Instalar Allure CLI
         run: npm install -g allure-commandline
 
       - name: Gerar relatório final
-        run: allure generate allure-results-merged -o allure-report --clean
+        run: allure generate allure-results -o allure-report --clean
 
       - name: Publicar no GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
