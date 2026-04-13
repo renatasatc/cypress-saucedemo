@@ -91,3 +91,32 @@ jobs:
         with:
           name: allure-api
           path: allure-report-api
+
+            publish-allure:
+    needs: [e2e-tests, api-tests]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Preparar resultados
+        run: |
+          mkdir allure-results-merged
+          cp -r allure-e2e/* allure-results-merged || true
+          cp -r allure-api/* allure-results-merged || true
+
+      - name: Instalar Allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Gerar relatório final
+        run: allure generate allure-results-merged -o allure-report --clean
+
+      - name: Publicar no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
