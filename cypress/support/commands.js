@@ -1,7 +1,5 @@
-Cypress.Commands.add('login', () => {
-  cy.visit('https://www.saucedemo.com')
+import loginPage from '../pages/LoginPage'
 
-  cy.get('[data-test="username"]').type('standard_user')
-  cy.get('[data-test="password"]').type('secret_sauce')
-  cy.get('[data-test="login-button"]').click()
+Cypress.Commands.add('login', (username = 'standard_user', password = 'secret_sauce') => {
+  loginPage.login(username, password)
 })
