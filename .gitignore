@@ -1,0 +1,68 @@
+# =========================
+# Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Cypress
+# =========================
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# =========================
+# Allure Reports
+# =========================
+allure-results/
+allure-report/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# OS / Sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Build / Cache
+# =========================
+dist/
+build/
+.cache/
+.tmp/
+coverage/
+
+# =========================
+# GitHub Actions artifacts
+# =========================
+*.tgz
+
+# =========================
+# Misc
+# =========================
+*.zip
+*.tar.gz
