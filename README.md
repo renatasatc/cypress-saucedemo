@@ -113,6 +113,7 @@ npx cypress run --spec "cypress/e2e/UI/*.cy.js"
 ### API
 - **Status code**
 - **Validação de rotas**
+- **Requisições com cy.request()**
 ---
 
 ## 🔁 CI/CD (GitHub Actions + GitHub Pages)
