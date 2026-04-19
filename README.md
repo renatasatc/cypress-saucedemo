@@ -122,6 +122,11 @@ jobs:
 npx cypress run
 allure generate allure-results --clean -o allure-report
 allure open allure-report
+## 📊 Relatório Online
+
+O relatório de execução pode ser acessado em:
+
+👉 https://renatasatc.github.io/cypress-saucedemo/
 📸 Evidências
 
 Screenshots automáticos em falhas:
