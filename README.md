@@ -4,45 +4,46 @@ Automação de testes E2E e API do SauceDemo utilizando Cypress, com foco em org
 
 🧠 Visão Geral
 
-Este projeto simula um ambiente real de automação de testes, aplicando:
+Este projeto tem como objetivo praticar automação de testes em um cenário real, cobrindo:
 
-Testes E2E (interface do usuário)
+Testes de interface (E2E)
 Testes de API com cy.request()
-Page Object Model (POM)
-Integração com CI/CD (GitHub Actions)
+Organização com Page Object Model (POM)
+Execução automatizada via CI/CD
 🏗 Estrutura do Projeto
-
-A estrutura segue uma organização clara e escalável:
-
 cypress/
 ├── e2e/
 │   ├── api/
-│   │   └── api.cy.js             # Testes de API
+│   │   └── api.cy.js              # Testes de API
 │   └── UI/
-│       ├── cart.cy.js            # Testes do carrinho
-│       ├── checkout.cy.js        # Testes de checkout
-│       ├── inventory.cy.js       # Testes de produtos
-│       ├── login.cy.js           # Testes de login
-│       ├── login.users.cy.js     # Variações de usuários
-│       └── menu.cy.js            # Testes de menu
+│       ├── cart.cy.js             # Testes do carrinho
+│       ├── checkout.cy.js         # Testes de checkout
+│       ├── inventory.cy.js        # Testes de produtos
+│       ├── login.cy.js            # Testes de login
+│       ├── login.users.cy.js      # Variação de usuários
+│       └── menu.cy.js             # Testes de menu
+│
 ├── fixtures/
-│   └── example.json              # Massa de dados
+│   └── example.json               # Massa de dados
+│
 ├── pages/
-│   └── LoginPage.js              # Page Object
-├── screenshots/                  # Evidências de falha
+│   └── LoginPage.js               # Page Object (Login)
+│
+├── screenshots/                   # Evidências de falha
+│
 ├── support/
-│   ├── commands.js               # Comandos customizados
-│   └── e2e.js                   # Configuração global
+│   ├── commands.js                # Comandos customizados
+│   └── e2e.js                    # Configuração global
 
-Outros arquivos importantes:
+Outros arquivos:
 
-.github/                          # Pipeline CI/CD
+.github/                           # GitHub Actions (CI/CD)
 cypress.config.js                 # Configuração do Cypress
 package.json                      # Dependências
 🧩 Padrão Utilizado
 Page Object Model (POM)
 
-A camada de interação com a UI está isolada em pages/.
+A camada de interação com a interface está isolada na pasta pages.
 
 // LoginPage.js
 login(username, password) {
@@ -50,94 +51,80 @@ login(username, password) {
   cy.get('#password').type(password)
   cy.get('#login-button').click()
 }
-
 Benefícios:
-
-Menos duplicação
-Testes mais limpos
-Manutenção simplificada
+Reutilização de código
+Redução de duplicação
+Maior legibilidade e manutenção
 ⚙️ Tecnologias
 Cypress
 JavaScript
 Node.js
-Allure (relatórios)
+Allure Reports
 📦 Instalação
 npm install
-▶️ Execução
+▶️ Execução dos Testes
 # Executar todos os testes
 npx cypress run
 
 # Abrir modo interativo
 npx cypress open
 
-# Apenas API
+# Executar apenas API
 npx cypress run --spec "cypress/e2e/api/api.cy.js"
 
-# Apenas UI
-npx cypress run --spec "cypress/e2e/UI/*.js"
+# Executar apenas UI
+npx cypress run --spec "cypress/e2e/UI/*.cy.js"
 🧪 Cobertura de Testes
 UI (E2E)
-Login (válido e inválido)
-Variação de usuários (login.users.cy.js)
+Login com diferentes usuários
+Validação de login inválido
 Inventário de produtos
-Carrinho
+Carrinho de compras
 Checkout
 Menu e logout
 API
-Validação de status code
-Testes de rotas
-Respostas HTTP
-🔁 CI/CD (GitHub Actions)
+Status code
+Validação de rotas
+Requisições com cy.request()
+🔁 CI/CD (GitHub Actions + GitHub Pages)
 
-O projeto possui pipeline automatizada com GitHub Actions.
+O projeto possui pipeline automatizada utilizando GitHub Actions.
 
-📁 Local:
-
-.github/workflows/
-O que a pipeline faz:
+⚙️ Fluxo da pipeline:
 Instala dependências
-Executa os testes Cypress
-Falha automaticamente se algum teste falhar
-Exemplo:
-name: Cypress Tests
+Executa testes Cypress em modo headless
+Gera relatório de execução (Allure)
+Publica automaticamente o relatório no GitHub Pages
+🌐 Publicação automática no GitHub Pages
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
+Após cada execução da pipeline, o relatório é publicado automaticamente em:
 
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
+👉 https://renatasatc.github.io/cypress-saucedemo/
 
-    steps:
-      - uses: actions/checkout@v4
+Isso permite acompanhar os resultados dos testes de forma visual e acessível, sem necessidade de execução local.
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npx cypress run
+📁 Estrutura relacionada
+.github/workflows/
+💡 Benefícios
+Relatórios sempre atualizados após cada execução
+Visibilidade dos testes em tempo real
+Simulação de fluxo real de CI/CD usado no mercado
+Menos dependência de execução local
 📊 Relatórios (Allure)
 npx cypress run
 allure generate allure-results --clean -o allure-report
 allure open allure-report
-## 📊 Relatório Online
-
-O relatório de execução pode ser acessado em:
-
-👉 https://renatasatc.github.io/cypress-saucedemo/
 📸 Evidências
 
-Screenshots automáticos em falhas:
+Screenshots automáticos em caso de falha:
 
 cypress/screenshots/
 💡 Diferenciais
-Estrutura organizada por tipo de teste
-Separação clara entre UI e API
+Estrutura organizada por tipo de teste (UI / API)
 Uso de Page Object Model
-Pipeline CI/CD integrada
-Cobertura de fluxos principais da aplicação
+Pipeline CI/CD automatizada
+Publicação automática de relatórios
+Projeto alinhado com práticas de mercado
 🎯 Objetivo
 
-Projeto desenvolvido para prática de automação com Cypress, aplicando padrões utilizados no mercado.
+Projeto desenvolvido para prática de automação com Cypress, aplicando boas práticas de engenharia de testes e CI/CD.
