@@ -41,7 +41,10 @@ cypress/
 ├── support/
 │   ├── commands.js                # Comandos customizados
 │   └── e2e.js                     # Configuração global
-📁 Outros arquivos
+```
+---
+## 📁 Outros arquivos
+```
 .github/                           # GitHub Actions (CI/CD)
 cypress.config.js                  # Configuração do Cypress
 package.json                       # Dependências
@@ -74,8 +77,21 @@ login(username, password) {
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> Node.js  
 - 📊 Allure Reports  
 ---
+## ▶️ Como executar o projeto
+### 📌 Pré-requisitos
 
-## 📦 Instalação
+Antes de rodar o projeto, certifique-se de ter instalado:
+
+- **Node.js (versão LTS recomendada)**
+- **npm ou yarn**
+- **Git**
+
+### 📥 Clonar o repositório
+``` 
+git clone https://github.com/renatasatc/cypress-saucedemo.git
+cd cypress-saucedemo
+``` 
+### 📦 Instalação
 ``` 
 npm install
 ```
@@ -114,7 +130,7 @@ npx cypress run --spec "cypress/e2e/UI/*.cy.js"
 ### API
 - **Status code**
 - **Validação de rotas**
-- **Requisições com cy.request()**
+- **Requisições com *cy.request()***
 ---
 
 ## 🔁 CI/CD (GitHub Actions + GitHub Pages)
@@ -143,8 +159,8 @@ Isso permite acompanhar os resultados dos testes de forma visual e acessível, s
 - **Visibilidade dos testes em tempo real**
 - **Simulação de fluxo real de CI/CD usado no mercado**
 - **Menos dependência de execução local**
-
-### 📊 Relatórios (Allure)
+---
+## 📊 Relatórios (Allure)
 ```
 npx cypress run
 allure generate allure-results --clean -o allure-report
