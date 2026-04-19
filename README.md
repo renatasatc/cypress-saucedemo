@@ -68,10 +68,11 @@ login(username, password) {
 - **🔧 Manutenção facilitada**
 ---
 ## ⚙️ Tecnologias
-- **Cypress**
-- **JavaScript**
-- **Node.js**
-- **Allure Reports**
+
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" width="20"/> Cypress  
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="20"/> JavaScript  
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> Node.js  
+- 📊 Allure Reports  
 ---
 
 ## 📦 Instalação
