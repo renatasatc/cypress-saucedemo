@@ -1,16 +1,23 @@
-🚀 Cypress SauceDemo Automation
+# 🚀 Cypress SauceDemo Automation
 
-Automação de testes E2E e API do SauceDemo utilizando Cypress, com foco em organização, reutilização de código e boas práticas.
+Automação de testes **E2E** e **API** site [SauceDemo](https://www.saucedemo.com), utilizando **Cypress**, com foco em organização, reutilização de código e boas práticas.
 
-🧠 Visão Geral
+---
+
+## 🧠 Visão Geral
 
 Este projeto tem como objetivo praticar automação de testes em um cenário real, cobrindo:
 
-Testes de interface (E2E)
-Testes de API com cy.request()
-Organização com Page Object Model (POM)
-Execução automatizada via CI/CD
-🏗 Estrutura do Projeto
+- **Testes de interface (E2E)**
+- **Testes de API com cy.request()**
+- **Organização com Page Object Model (POM)**
+- **Execução automatizada via CI/CD**
+
+---
+
+## 🏗 Estrutura do Projeto
+
+```bash
 cypress/
 ├── e2e/
 │   ├── api/
@@ -33,14 +40,13 @@ cypress/
 │
 ├── support/
 │   ├── commands.js                # Comandos customizados
-│   └── e2e.js                    # Configuração global
-
-Outros arquivos:
-
+│   └── e2e.js                     # Configuração global
+📁 Outros arquivos
 .github/                           # GitHub Actions (CI/CD)
-cypress.config.js                 # Configuração do Cypress
-package.json                      # Dependências
+cypress.config.js                  # Configuração do Cypress
+package.json                       # Dependências
 🧩 Padrão Utilizado
+
 Page Object Model (POM)
 
 A camada de interação com a interface está isolada na pasta pages.
@@ -51,10 +57,11 @@ login(username, password) {
   cy.get('#password').type(password)
   cy.get('#login-button').click()
 }
-Benefícios:
-Reutilização de código
-Redução de duplicação
-Maior legibilidade e manutenção
+💡 Benefícios
+♻️ Reutilização de código
+🧹 Redução de duplicação
+📖 Maior legibilidade
+🔧 Manutenção facilitada
 ⚙️ Tecnologias
 Cypress
 JavaScript
@@ -63,16 +70,21 @@ Allure Reports
 📦 Instalação
 npm install
 ▶️ Execução dos Testes
-# Executar todos os testes
+
+Executar todos os testes
+
 npx cypress run
 
-# Abrir modo interativo
+Abrir modo interativo
+
 npx cypress open
 
-# Executar apenas API
+Executar apenas API
+
 npx cypress run --spec "cypress/e2e/api/api.cy.js"
 
-# Executar apenas UI
+Executar apenas UI
+
 npx cypress run --spec "cypress/e2e/UI/*.cy.js"
 🧪 Cobertura de Testes
 UI (E2E)
@@ -90,7 +102,7 @@ Requisições com cy.request()
 
 O projeto possui pipeline automatizada utilizando GitHub Actions.
 
-⚙️ Fluxo da pipeline:
+⚙️ Fluxo da pipeline
 Instala dependências
 Executa testes Cypress em modo headless
 Gera relatório de execução (Allure)
